@@ -121,13 +121,16 @@
 	      this.setState({ sortby: criteria });
 	
 	      var context = this;
+	
 	      var apiUrl = 'https://www.reddit.com/r/';
-	      var fullUrl = apiUrl + term + '/' + criteria + '.json';
 	
 	      // If no search term, get reddit homepage
 	      if (!term) {
-	        fullUrl = 'https://www.reddit.com/.json';
+	        apiUrl = 'https://www.reddit.com/';
+	        term = '';
 	      }
+	
+	      var fullUrl = apiUrl + term + '/' + criteria + '.json';
 	
 	      // If search term is less than 3 chars, don't GET. Too short.
 	      if (term && term.length < 3) {
@@ -136,9 +139,9 @@
 	        this.setState({ subreddit: term });
 	      }
 	
-	      console.log(fullUrl);
-	      console.log(this.state);
-	      console.log(term);
+	      // console.log(fullUrl);
+	      // console.log(this.state);
+	      // console.log(term);
 	      // Get search results
 	      axios.get(fullUrl).then(function (response) {
 	        console.log(response.data.data.children);
@@ -22375,45 +22378,69 @@
 	      null,
 	      _react2.default.createElement(
 	        'li',
-	        { onClick: function onClick() {
-	            return changeSort(term, 'hot');
-	          } },
-	        'Hot'
+	        null,
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: function onClick() {
+	              return changeSort(term, 'hot');
+	            } },
+	          'Hot'
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        { onClick: function onClick() {
-	            return changeSort(term, 'new');
-	          } },
-	        'New'
+	        null,
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: function onClick() {
+	              return changeSort(term, 'new');
+	            } },
+	          'New'
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        { onClick: function onClick() {
-	            return changeSort(term, 'rising');
-	          } },
-	        'Rising'
+	        null,
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: function onClick() {
+	              return changeSort(term, 'rising');
+	            } },
+	          'Rising'
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        { onClick: function onClick() {
-	            return changeSort(term, 'controversial');
-	          } },
-	        'Controversial'
+	        null,
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: function onClick() {
+	              return changeSort(term, 'controversial');
+	            } },
+	          'Controversial'
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        { onClick: function onClick() {
-	            return changeSort(term, 'top');
-	          } },
-	        'Top'
+	        null,
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: function onClick() {
+	              return changeSort(term, 'top');
+	            } },
+	          'Top'
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        { onClick: function onClick() {
-	            return changeSort(term, 'ads');
-	          } },
-	        'Promoted'
+	        null,
+	        _react2.default.createElement(
+	          'span',
+	          { onClick: function onClick() {
+	              return changeSort(term, 'ads');
+	            } },
+	          'Promoted'
+	        )
 	      )
 	    )
 	  );

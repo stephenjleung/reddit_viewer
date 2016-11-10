@@ -37,13 +37,17 @@ class App extends React.Component {
     this.setState({sortby: criteria});
 
     var context = this;
+    
     var apiUrl = 'https://www.reddit.com/r/';
-    var fullUrl = apiUrl + term + '/' + criteria + '.json';
+
 
     // If no search term, get reddit homepage
     if (!term) {
-      fullUrl = 'https://www.reddit.com/.json';
+      apiUrl = 'https://www.reddit.com/';
+      term = '';
     }
+
+    var fullUrl = apiUrl + term + '/' + criteria + '.json';
 
     // If search term is less than 3 chars, don't GET. Too short.
     if (term && (term.length < 3)) {
@@ -52,9 +56,9 @@ class App extends React.Component {
       this.setState({subreddit: term});
     }
 
-    console.log(fullUrl);
-    console.log(this.state);
-    console.log(term);
+    // console.log(fullUrl);
+    // console.log(this.state);
+    // console.log(term);
     // Get search results
     axios.get(fullUrl)
       .then(function(response) {
