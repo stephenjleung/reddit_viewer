@@ -13,7 +13,7 @@ const Posts = (props) => {
   });
   
   return (
-    <ul>
+    <ul style={{marginRight: '35px'}}>
       {postItems}
     </ul>
   );

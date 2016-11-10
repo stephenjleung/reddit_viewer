@@ -83,12 +83,7 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // npm run build runs Webpack in production mode, 
-	// which minimizes the bundle file automatically, 
-	// and the command npm run dev runs the Webpack 
-	// in the watch mode.
-	
-	// npm run dev
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -109,7 +104,7 @@
 	
 	  _createClass(App, [{
 	    key: 'loadSubreddit',
-	    value: function loadSubreddit(term, criteria) {
+	    value: function loadSubreddit(term, criteria, loadmore) {
 	
 	      if (term) {
 	        term = term.replace(' ', '+');
@@ -120,6 +115,7 @@
 	      }
 	      this.setState({ sortby: criteria });
 	
+	      // Save this for inside axios call
 	      var context = this;
 	
 	      var apiUrl = 'https://www.reddit.com/r/';
@@ -130,7 +126,16 @@
 	        term = '';
 	      }
 	
-	      var fullUrl = apiUrl + term + '/' + criteria + '.json';
+	      console.log('loadmore is ', loadmore);
+	      if (loadmore) {
+	        var lastItem = this.state.posts[this.state.posts.length - 1].data.name;
+	        console.log('the last item is: ', lastItem);
+	        var after = '?after=' + lastItem;
+	      } else {
+	        var after = '';
+	      }
+	
+	      var fullUrl = apiUrl + term + '/' + criteria + '.json' + after;
 	
 	      // If search term is less than 3 chars, don't GET. Too short.
 	      if (term && term.length < 3) {
@@ -139,25 +144,23 @@
 	        this.setState({ subreddit: term });
 	      }
 	
-	      // console.log(fullUrl);
-	      // console.log(this.state);
-	      // console.log(term);
 	      // Get search results
 	      axios.get(fullUrl).then(function (response) {
-	        // console.log(response.data.data.children);
-	        context.setState({
-	          posts: response.data.data.children
-	        });
+	        console.log(response.data.data.children);
+	
+	        if (loadmore) {
+	          context.setState({
+	            posts: context.state.posts.concat(response.data.data.children)
+	          });
+	        } else {
+	          context.setState({
+	            posts: response.data.data.children
+	          });
+	        }
 	      }).catch(function (error) {
 	        console.log(error);
 	      });
 	    }
-	
-	    // changeSort(criteria) {
-	    //   // Adjust sort criteria and reload posts
-	    //   this.loadSubreddit(this.state.subreddit, criteria);
-	    // }
-	
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
@@ -169,8 +172,9 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var loadSubreddit = _.debounce(function (term, criteria) {
-	        _this2.loadSubreddit(term, criteria);
+	      // To limit Axios calls during live-search
+	      var loadSubreddit = _.debounce(function (term, criteria, loadmore) {
+	        _this2.loadSubreddit(term, criteria, loadmore);
 	      }, 300);
 	      return _react2.default.createElement(
 	        'div',
@@ -179,7 +183,14 @@
 	        _react2.default.createElement(_Subheader2.default, null),
 	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: loadSubreddit.bind(this) }),
 	        _react2.default.createElement(_SortBy2.default, { changeSort: loadSubreddit.bind(this), term: this.state.subreddit, sortby: this.state.sortby }),
-	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts })
+	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts }),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: function onClick() {
+	              loadSubreddit(_this2.state.subreddit, _this2.state.sortby, true);
+	            } },
+	          'LOAD MORE'
+	        )
 	      );
 	    }
 	  }]);
@@ -22104,7 +22115,7 @@
 	
 	  return _react2.default.createElement(
 	    'ul',
-	    null,
+	    { style: { marginRight: '35px' } },
 	    postItems
 	  );
 	};
