@@ -28,10 +28,17 @@ class App extends React.Component {
     var apiUrl = 'https://www.reddit.com/r/';
     var fullUrl = apiUrl + term + '.json';
 
+    // If no search term, get reddit homepage
     if (!term) {
       fullUrl = 'https://www.reddit.com/.json';
     }
 
+    // If search term is less than 3 chars, don't GET. Too short.
+    if (term && (term.length < 3)) {
+      return;
+    }
+
+    // Get search results
     axios.get(fullUrl)
       .then(function(response) {
         console.log(response.data.data.children);
@@ -46,6 +53,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // Perform GET of homepage on page load.
     this.loadSubreddit();
   }
 
