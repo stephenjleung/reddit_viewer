@@ -62,7 +62,7 @@ class App extends React.Component {
     // Get search results
     axios.get(fullUrl)
       .then(function(response) {
-        console.log(response.data.data.children);
+        // console.log(response.data.data.children);
         context.setState({
           posts: response.data.data.children
         });

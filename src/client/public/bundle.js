@@ -144,7 +144,7 @@
 	      // console.log(term);
 	      // Get search results
 	      axios.get(fullUrl).then(function (response) {
-	        console.log(response.data.data.children);
+	        // console.log(response.data.data.children);
 	        context.setState({
 	          posts: response.data.data.children
 	        });
@@ -22324,17 +22324,10 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	//<h3 className='' style={{textAlign: 'center'}}>Default: Sorted by Hotness</h3>
 	var Subheader = function Subheader(props) {
 	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'h3',
-	      { className: '', style: { textAlign: 'center' } },
-	      'Default: Sorted by Hotness'
-	    )
-	  );
+	  return _react2.default.createElement('div', null);
 	};
 	
 	exports.default = Subheader;
@@ -22358,6 +22351,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var liStyle = {
+	  display: 'inline-block',
+	  padding: '10px'
+	};
+	
 	var SortBy = function SortBy(_ref) {
 	  var changeSort = _ref.changeSort,
 	      term = _ref.term,
@@ -22366,22 +22364,30 @@
 	
 	  return _react2.default.createElement(
 	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Sorting by ',
-	      sortby
-	    ),
+	    { style: { textAlign: 'center' } },
 	    _react2.default.createElement(
 	      'ul',
-	      null,
+	      { style: { listStyleType: 'none' } },
 	      _react2.default.createElement(
 	        'li',
-	        null,
+	        { style: { display: 'inline-block', padding: '10px', minWidth: '200px' } },
+	        'Sorting by ',
 	        _react2.default.createElement(
-	          'span',
-	          { onClick: function onClick() {
+	          'button',
+	          { className: 'btn btn-primary' },
+	          _react2.default.createElement(
+	            'i',
+	            null,
+	            sortby
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        { style: liStyle },
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-secondary', onClick: function onClick() {
 	              return changeSort(term, 'hot');
 	            } },
 	          'Hot'
@@ -22389,10 +22395,10 @@
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        null,
+	        { style: liStyle },
 	        _react2.default.createElement(
-	          'span',
-	          { onClick: function onClick() {
+	          'button',
+	          { className: 'btn btn-secondary', onClick: function onClick() {
 	              return changeSort(term, 'new');
 	            } },
 	          'New'
@@ -22400,10 +22406,10 @@
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        null,
+	        { style: liStyle },
 	        _react2.default.createElement(
-	          'span',
-	          { onClick: function onClick() {
+	          'button',
+	          { className: 'btn btn-secondary', onClick: function onClick() {
 	              return changeSort(term, 'rising');
 	            } },
 	          'Rising'
@@ -22411,10 +22417,10 @@
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        null,
+	        { style: liStyle },
 	        _react2.default.createElement(
-	          'span',
-	          { onClick: function onClick() {
+	          'button',
+	          { className: 'btn btn-secondary', onClick: function onClick() {
 	              return changeSort(term, 'controversial');
 	            } },
 	          'Controversial'
@@ -22422,10 +22428,10 @@
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        null,
+	        { style: liStyle },
 	        _react2.default.createElement(
-	          'span',
-	          { onClick: function onClick() {
+	          'button',
+	          { className: 'btn btn-secondary', onClick: function onClick() {
 	              return changeSort(term, 'top');
 	            } },
 	          'Top'
@@ -22433,10 +22439,10 @@
 	      ),
 	      _react2.default.createElement(
 	        'li',
-	        null,
+	        { style: liStyle },
 	        _react2.default.createElement(
-	          'span',
-	          { onClick: function onClick() {
+	          'button',
+	          { className: 'btn btn-secondary', onClick: function onClick() {
 	              return changeSort(term, 'ads');
 	            } },
 	          'Promoted'
