@@ -8,20 +8,18 @@ const PostItem = ({post}) => {
   return (
     <li className="list-group-item">
       <div className="media">
-
         <div className="media-left media-middle" style={{minWidth: '50px', textAlilgn: 'center'}}>
           <h4>{post.score}</h4>
         </div>
         <div className="media-left media-middle">
-
-          <img className="media-object" style={{minWidth: '140px', textAlign: 'center', borderRadius: '6px'}} src={ (imageUrl.substring(0, 4) !== 'http' ) ? altImage : imageUrl } alt="No Thumbnail Provided" />
+          <a href={post.url} target='_blank'>
+            <img className="media-object" style={{minWidth: '140px', textAlign: 'center', borderRadius: '6px'}} src={ (imageUrl.substring(0, 4) !== 'http' ) ? altImage : imageUrl } alt="No Thumbnail Provided" />
+          </a>
         </div>
         <div className="media-body media-middle">
-          <div className="media-heading"><h4>{post.title}</h4></div>
+          <div className="media-heading"><h4><a href={post.url} target='_blank'>{post.title}</a></h4></div>
           <p>submitted by {post.author} to /r/{post.subreddit}</p>
-          <p>{post.num_comments} comments</p>
-
-
+          <p><a href={'https://www.reddit.com' + post.permalink} target='_blank'>{post.num_comments} comments</a></p>
         </div>
       </div>
     </li>

@@ -22232,7 +22232,11 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'media-left media-middle' },
-	        _react2.default.createElement('img', { className: 'media-object', style: { minWidth: '140px', textAlign: 'center', borderRadius: '6px' }, src: imageUrl.substring(0, 4) !== 'http' ? altImage : imageUrl, alt: 'No Thumbnail Provided' })
+	        _react2.default.createElement(
+	          'a',
+	          { href: post.url, target: '_blank' },
+	          _react2.default.createElement('img', { className: 'media-object', style: { minWidth: '140px', textAlign: 'center', borderRadius: '6px' }, src: imageUrl.substring(0, 4) !== 'http' ? altImage : imageUrl, alt: 'No Thumbnail Provided' })
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -22243,7 +22247,11 @@
 	          _react2.default.createElement(
 	            'h4',
 	            null,
-	            post.title
+	            _react2.default.createElement(
+	              'a',
+	              { href: post.url, target: '_blank' },
+	              post.title
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -22257,8 +22265,12 @@
 	        _react2.default.createElement(
 	          'p',
 	          null,
-	          post.num_comments,
-	          ' comments'
+	          _react2.default.createElement(
+	            'a',
+	            { href: 'https://www.reddit.com' + post.permalink, target: '_blank' },
+	            post.num_comments,
+	            ' comments'
+	          )
 	        )
 	      )
 	    )
