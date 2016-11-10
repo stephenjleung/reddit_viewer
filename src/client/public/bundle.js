@@ -22181,7 +22181,7 @@
   \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22198,24 +22198,25 @@
 	
 	
 	  var imageUrl = post.thumbnail;
+	  var altImage = 'http://vignette3.wikia.nocookie.net/ensemble-stars/images/1/10/Reddit.png/revision/latest?cb=20151110193005';
 	
 	  return _react2.default.createElement(
-	    "li",
-	    { className: "list-group-item" },
+	    'li',
+	    { className: 'list-group-item' },
 	    _react2.default.createElement(
-	      "div",
-	      { className: "" },
+	      'div',
+	      { className: 'media' },
 	      _react2.default.createElement(
-	        "div",
-	        { className: "media-left" },
-	        _react2.default.createElement("img", { className: "media-object", style: { minWidth: '140px' }, src: imageUrl === 'self' || imageUrl === 'default' ? null : imageUrl, alt: "No Thumbnail Provided" })
+	        'div',
+	        { className: 'media-left' },
+	        _react2.default.createElement('img', { className: 'media-object', style: { width: '100px', textAlign: 'center' }, src: imageUrl === 'self' || imageUrl === 'default' ? altImage : imageUrl, alt: 'No Thumbnail Provided' })
 	      ),
 	      _react2.default.createElement(
-	        "div",
-	        { className: "media-body" },
+	        'div',
+	        { className: 'media-body' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "media-heading" },
+	          'div',
+	          { className: 'media-heading' },
 	          post.title
 	        )
 	      )
