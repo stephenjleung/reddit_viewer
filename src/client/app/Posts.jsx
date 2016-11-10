@@ -1,15 +1,26 @@
 import React from 'react';
+import PostItem from './PostItem.jsx';
 
-class Posts extends React.Component {
+const Posts = (props) => {
 
-  render() {
+  const postItems = props.posts.map((post) => {
     return (
-      <div>
-        Placeholder for posts.
-      </div>
+      <PostItem
+        key={post.data.id}
+        post={post.data}
+      />
     );
-  }
 
-}
+  });
+
+  
+  return (
+    <ul>
+      {postItems}
+    </ul>
+  );
+  
+
+};
 
 export default Posts;

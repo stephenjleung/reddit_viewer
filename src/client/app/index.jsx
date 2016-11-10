@@ -63,7 +63,7 @@ class App extends React.Component {
       <div>
         <Header />
         <SearchBar onSearchTermChange={this.loadSubreddit.bind(this)} />
-        <Posts />
+        <Posts posts={this.state.posts} />
       </div>
     );
   }

@@ -140,7 +140,7 @@
 	        null,
 	        _react2.default.createElement(_Header2.default, null),
 	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: this.loadSubreddit.bind(this) }),
-	        _react2.default.createElement(_Posts2.default, null)
+	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts })
 	      );
 	    }
 	  }]);
@@ -22044,42 +22044,31 @@
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _PostItem = __webpack_require__(/*! ./PostItem.jsx */ 176);
+	
+	var _PostItem2 = _interopRequireDefault(_PostItem);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var Posts = function Posts(props) {
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	  var postItems = props.posts.map(function (post) {
+	    return _react2.default.createElement(_PostItem2.default, {
+	      key: post.data.id,
+	      post: post.data
+	    });
+	  });
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Posts = function (_React$Component) {
-	  _inherits(Posts, _React$Component);
-	
-	  function Posts() {
-	    _classCallCheck(this, Posts);
-	
-	    return _possibleConstructorReturn(this, (Posts.__proto__ || Object.getPrototypeOf(Posts)).apply(this, arguments));
-	  }
-	
-	  _createClass(Posts, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Placeholder for posts.'
-	      );
-	    }
-	  }]);
-	
-	  return Posts;
-	}(_react2.default.Component);
+	  return _react2.default.createElement(
+	    'ul',
+	    null,
+	    postItems
+	  );
+	};
 	
 	exports.default = Posts;
 
@@ -22184,6 +22173,57 @@
 	}(_react2.default.Component);
 	
 	exports.default = SearchBar;
+
+/***/ },
+/* 176 */
+/*!*************************************!*\
+  !*** ./src/client/app/PostItem.jsx ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PostItem = function PostItem(_ref) {
+	  var post = _ref.post;
+	
+	
+	  var imageUrl = post.thumbnail;
+	
+	  return _react2.default.createElement(
+	    "li",
+	    { className: "list-group-item" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "media-left" },
+	        _react2.default.createElement("img", { className: "media-object", style: { minWidth: '140px' }, src: imageUrl === 'self' || imageUrl === 'default' ? null : imageUrl, alt: "No Thumbnail Provided" })
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "media-body" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "media-heading" },
+	          post.title
+	        )
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = PostItem;
 
 /***/ }
 /******/ ]);
