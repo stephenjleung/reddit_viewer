@@ -102,16 +102,27 @@
 	    key: 'loadSubreddit',
 	    value: function loadSubreddit(term) {
 	
+	      var context = this;
 	      var apiUrl = 'https://www.reddit.com/r/';
+	      var fullUrl = apiUrl + term + '.json';
 	
-	      axios.get(apiUrl + term + '.json').then(function (response) {
+	      if (!term) {
+	        fullUrl = 'https://www.reddit.com/.json';
+	      }
+	
+	      axios.get(fullUrl).then(function (response) {
 	        console.log(response.data.data.children);
-	        this.setState({
+	        context.setState({
 	          posts: response.data.data.children
 	        });
 	      }).catch(function (error) {
 	        console.log(error);
 	      });
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.loadSubreddit();
 	    }
 	  }, {
 	    key: 'render',
@@ -120,7 +131,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Header2.default, null),
-	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: this.loadSubreddit }),
+	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: this.loadSubreddit.bind(this) }),
 	        _react2.default.createElement(_Posts2.default, null)
 	      );
 	    }

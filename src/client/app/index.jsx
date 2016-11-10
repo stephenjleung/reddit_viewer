@@ -24,19 +24,29 @@ class App extends React.Component {
 
   loadSubreddit(term) {
 
+    var context = this;
     var apiUrl = 'https://www.reddit.com/r/';
+    var fullUrl = apiUrl + term + '.json';
 
-    axios.get(apiUrl + term + '.json')
+    if (!term) {
+      fullUrl = 'https://www.reddit.com/.json';
+    }
+
+    axios.get(fullUrl)
       .then(function(response) {
         console.log(response.data.data.children);
-        this.setState({
+        context.setState({
           posts: response.data.data.children
         });
       })
       .catch(function(error) {
         console.log(error);
       });
-      
+
+  }
+
+  componentDidMount() {
+    this.loadSubreddit();
   }
 
 
@@ -44,7 +54,7 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <SearchBar onSearchTermChange={this.loadSubreddit} />
+        <SearchBar onSearchTermChange={this.loadSubreddit.bind(this)} />
         <Posts />
       </div>
     );
