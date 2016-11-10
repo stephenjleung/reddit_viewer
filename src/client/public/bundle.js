@@ -22086,7 +22086,11 @@
 	  return _react2.default.createElement(
 	    'div',
 	    null,
-	    'Header'
+	    _react2.default.createElement(
+	      'h1',
+	      { className: 'jumbotron', style: { textAlign: 'center' } },
+	      'Reddit Viewer'
+	    )
 	  );
 	};
 	
