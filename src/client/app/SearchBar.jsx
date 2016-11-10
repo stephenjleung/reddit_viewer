@@ -10,11 +10,15 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{textAlign: 'center', paddingBottom: '1.5em'}}>
+        <h3>
         <input 
+          placeholder="Enter Subreddit(s) Here"
           value={this.state.term}
           onChange={event => this.onInputChange(event.target.value)}
+          style={{}}
         />
+        </h3>
       </div>
     );
   }

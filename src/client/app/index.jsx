@@ -23,6 +23,9 @@ class App extends React.Component {
   }
 
   loadSubreddit(term) {
+    if (term) {
+      term = term.replace(' ', '+');
+    }
 
     var context = this;
     var apiUrl = 'https://www.reddit.com/r/';

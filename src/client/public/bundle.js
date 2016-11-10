@@ -101,6 +101,9 @@
 	  _createClass(App, [{
 	    key: 'loadSubreddit',
 	    value: function loadSubreddit(term) {
+	      if (term) {
+	        term = term.replace(' ', '+');
+	      }
 	
 	      var context = this;
 	      var apiUrl = 'https://www.reddit.com/r/';
@@ -22152,13 +22155,19 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement('input', {
-	          value: this.state.term,
-	          onChange: function onChange(event) {
-	            return _this2.onInputChange(event.target.value);
-	          }
-	        })
+	        { style: { textAlign: 'center', paddingBottom: '1.5em' } },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          _react2.default.createElement('input', {
+	            placeholder: 'Enter Subreddit(s) Here',
+	            value: this.state.term,
+	            onChange: function onChange(event) {
+	              return _this2.onInputChange(event.target.value);
+	            },
+	            style: {}
+	          })
+	        )
 	      );
 	    }
 	  }, {
@@ -22218,7 +22227,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'media-left media-middle' },
-	        _react2.default.createElement('img', { className: 'media-object', style: { minWidth: '140px', textAlign: 'center', borderRadius: '6px' }, src: imageUrl === 'self' || imageUrl === 'default' ? altImage : imageUrl, alt: 'No Thumbnail Provided' })
+	        _react2.default.createElement('img', { className: 'media-object', style: { minWidth: '140px', textAlign: 'center', borderRadius: '6px' }, src: imageUrl.substring(0, 4) !== 'http' ? altImage : imageUrl, alt: 'No Thumbnail Provided' })
 	      ),
 	      _react2.default.createElement(
 	        'div',

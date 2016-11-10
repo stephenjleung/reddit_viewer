@@ -14,7 +14,7 @@ const PostItem = ({post}) => {
         </div>
         <div className="media-left media-middle">
 
-          <img className="media-object" style={{minWidth: '140px', textAlign: 'center', borderRadius: '6px'}} src={ (imageUrl === 'self' || imageUrl === 'default') ? altImage : imageUrl } alt="No Thumbnail Provided" />
+          <img className="media-object" style={{minWidth: '140px', textAlign: 'center', borderRadius: '6px'}} src={ (imageUrl.substring(0, 4) !== 'http' ) ? altImage : imageUrl } alt="No Thumbnail Provided" />
         </div>
         <div className="media-body media-middle">
           <div className="media-heading"><h4>{post.title}</h4></div>
