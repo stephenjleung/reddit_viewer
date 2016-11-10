@@ -9,6 +9,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import Header from './Header.jsx';
 import Posts from './Posts.jsx';
+import SearchBar from './SearchBar.jsx';
 
 class App extends React.Component {
 
@@ -35,8 +36,7 @@ class App extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
-
-
+      
   }
 
 
@@ -44,6 +44,7 @@ class App extends React.Component {
     return (
       <div>
         <Header />
+        <SearchBar onSearchTermChange={this.loadSubreddit} />
         <Posts />
       </div>
     );
