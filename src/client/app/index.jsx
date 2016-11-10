@@ -8,6 +8,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Header from './Header.jsx';
+import Subheader from './Subheader.jsx';
 import Posts from './Posts.jsx';
 import SearchBar from './SearchBar.jsx';
 
@@ -65,6 +66,7 @@ class App extends React.Component {
     return (
       <div>
         <Header />
+        <Subheader />
         <SearchBar onSearchTermChange={this.loadSubreddit.bind(this)} />
         <Posts posts={this.state.posts} />
       </div>

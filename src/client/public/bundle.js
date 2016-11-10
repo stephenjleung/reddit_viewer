@@ -61,6 +61,10 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
+	var _Subheader = __webpack_require__(/*! ./Subheader.jsx */ 177);
+	
+	var _Subheader2 = _interopRequireDefault(_Subheader);
+	
 	var _Posts = __webpack_require__(/*! ./Posts.jsx */ 173);
 	
 	var _Posts2 = _interopRequireDefault(_Posts);
@@ -142,6 +146,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_Header2.default, null),
+	        _react2.default.createElement(_Subheader2.default, null),
 	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: this.loadSubreddit.bind(this) }),
 	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts })
 	      );
@@ -22261,6 +22266,40 @@
 	};
 	
 	exports.default = PostItem;
+
+/***/ },
+/* 177 */
+/*!**************************************!*\
+  !*** ./src/client/app/Subheader.jsx ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Subheader = function Subheader(props) {
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'h3',
+	      { className: '', style: { textAlign: 'center' } },
+	      'Default: Sorted by Hotness'
+	    )
+	  );
+	};
+	
+	exports.default = Subheader;
 
 /***/ }
 /******/ ]);
