@@ -7,14 +7,44 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import TestComponent from './TestComponent.jsx';
+import Header from './Header.jsx';
+import Posts from './Posts.jsx';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      subreddit: null,
+      posts: []
+    };
+    
+  }
+
+  loadSubreddit(term) {
+
+    var apiUrl = 'https://www.reddit.com/r/';
+
+    axios.get(apiUrl + term + '.json')
+      .then(function(response) {
+        console.log(response.data.data.children);
+        this.setState({
+          posts: response.data.data.children
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+
+  }
+
+
   render () {
     return (
       <div>
-        <p> Hello React! From index.jsx </p>
-        <TestComponent />
+        <Header />
+        <Posts />
       </div>
     );
   }

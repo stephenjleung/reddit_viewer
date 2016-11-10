@@ -57,9 +57,13 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 34);
 	
-	var _TestComponent = __webpack_require__(/*! ./TestComponent.jsx */ 172);
+	var _Header = __webpack_require__(/*! ./Header.jsx */ 174);
 	
-	var _TestComponent2 = _interopRequireDefault(_TestComponent);
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _Posts = __webpack_require__(/*! ./Posts.jsx */ 173);
+	
+	var _Posts2 = _interopRequireDefault(_Posts);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -77,24 +81,42 @@
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 	
-	  function App() {
+	  function App(props) {
 	    _classCallCheck(this, App);
 	
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	
+	    _this.state = {
+	      subreddit: null,
+	      posts: []
+	    };
+	
+	    return _this;
 	  }
 	
 	  _createClass(App, [{
+	    key: 'loadSubreddit',
+	    value: function loadSubreddit(term) {
+	
+	      var apiUrl = 'https://www.reddit.com/r/';
+	
+	      axios.get(apiUrl + term + '.json').then(function (response) {
+	        console.log(response.data.data.children);
+	        this.setState({
+	          posts: response.data.data.children
+	        });
+	      }).catch(function (error) {
+	        console.log(error);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          ' Hello React! From index.jsx '
-	        ),
-	        _react2.default.createElement(_TestComponent2.default, null)
+	        _react2.default.createElement(_Header2.default, null),
+	        _react2.default.createElement(_Posts2.default, null)
 	      );
 	    }
 	  }]);
@@ -21985,10 +22007,11 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./~/process/browser.js */ 3)))
 
 /***/ },
-/* 172 */
-/*!******************************************!*\
-  !*** ./src/client/app/TestComponent.jsx ***!
-  \******************************************/
+/* 172 */,
+/* 173 */
+/*!**********************************!*\
+  !*** ./src/client/app/Posts.jsx ***!
+  \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22011,54 +22034,63 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var TestComponent = function (_React$Component) {
-	  _inherits(TestComponent, _React$Component);
+	var Posts = function (_React$Component) {
+	  _inherits(Posts, _React$Component);
 	
-	  function TestComponent(props) {
-	    _classCallCheck(this, TestComponent);
+	  function Posts() {
+	    _classCallCheck(this, Posts);
 	
-	    var _this = _possibleConstructorReturn(this, (TestComponent.__proto__ || Object.getPrototypeOf(TestComponent)).call(this, props));
-	
-	    _this.state = { likesCount: 0 };
-	    _this.onLike = _this.onLike.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (Posts.__proto__ || Object.getPrototypeOf(Posts)).apply(this, arguments));
 	  }
 	
-	  _createClass(TestComponent, [{
-	    key: 'onLike',
-	    value: function onLike() {
-	      var newLikesCount = this.state.likesCount + 1;
-	      this.setState({ likesCount: newLikesCount });
-	    }
+	  _createClass(Posts, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {}
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Likes : ',
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          this.state.likesCount
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.onLike },
-	            'Like Me'
-	          )
-	        )
+	        'Placeholder for posts.'
 	      );
 	    }
 	  }]);
 	
-	  return TestComponent;
+	  return Posts;
 	}(_react2.default.Component);
 	
-	exports.default = TestComponent;
+	exports.default = Posts;
+
+/***/ },
+/* 174 */
+/*!***********************************!*\
+  !*** ./src/client/app/Header.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Header = function Header(props) {
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    'Header'
+	  );
+	};
+	
+	exports.default = Header;
 
 /***/ }
 /******/ ]);
