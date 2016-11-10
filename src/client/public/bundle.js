@@ -167,13 +167,18 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
+	      var loadSubreddit = _.debounce(function (term, criteria) {
+	        _this2.loadSubreddit(term, criteria);
+	      }, 300);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(_Header2.default, null),
 	        _react2.default.createElement(_Subheader2.default, null),
-	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: this.loadSubreddit.bind(this) }),
-	        _react2.default.createElement(_SortBy2.default, { changeSort: this.loadSubreddit.bind(this), term: this.state.subreddit, sortby: this.state.sortby }),
+	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: loadSubreddit.bind(this) }),
+	        _react2.default.createElement(_SortBy2.default, { changeSort: loadSubreddit.bind(this), term: this.state.subreddit, sortby: this.state.sortby }),
 	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts })
 	      );
 	    }

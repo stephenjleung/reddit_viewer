@@ -85,12 +85,13 @@ class App extends React.Component {
 
 
   render () {
+    const loadSubreddit = _.debounce((term, criteria) => { this.loadSubreddit(term, criteria); }, 300);
     return (
       <div>
         <Header />
         <Subheader />
-        <SearchBar onSearchTermChange={this.loadSubreddit.bind(this)} />
-        <SortBy changeSort={this.loadSubreddit.bind(this)} term={this.state.subreddit} sortby={this.state.sortby} />
+        <SearchBar onSearchTermChange={loadSubreddit.bind(this)} />
+        <SortBy changeSort={loadSubreddit.bind(this)} term={this.state.subreddit} sortby={this.state.sortby} />
         <Posts posts={this.state.posts} />
       </div>
     );

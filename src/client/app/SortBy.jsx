@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const liStyle = {
   display: 'inline-block',
   padding: '10px',
@@ -12,7 +11,7 @@ const SortBy = ({changeSort, term, sortby}) => {
     <div style={{textAlign: 'center'}}>
       
       <ul style={{listStyleType: 'none'}}>
-        <li style={{  display: 'inline-block', padding: '10px', minWidth: '200px'}}>Sorting by <button className="btn btn-primary"><i>{sortby}</i></button></li>
+        <li style={{ display: 'inline-block', padding: '10px', minWidth: '200px'}}>Sorting by <button className="btn btn-primary"><i>{sortby}</i></button></li>
         <li style={liStyle}><button className="btn btn-secondary" onClick={() => changeSort(term, 'hot')} >Hot</button></li>
         <li style={liStyle}><button className="btn btn-secondary" onClick={() => changeSort(term, 'new')} >New</button></li>
         <li style={liStyle}><button className="btn btn-secondary" onClick={() => changeSort(term, 'rising')} >Rising</button></li>

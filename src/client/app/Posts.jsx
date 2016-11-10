@@ -10,9 +10,7 @@ const Posts = (props) => {
         post={post.data}
       />
     );
-
   });
-
   
   return (
     <ul>
@@ -20,7 +18,6 @@ const Posts = (props) => {
     </ul>
   );
   
-
 };
 
 export default Posts;
