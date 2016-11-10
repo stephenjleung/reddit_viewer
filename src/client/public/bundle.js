@@ -65,13 +65,17 @@
 	
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 	
-	var _Posts = __webpack_require__(/*! ./Posts.jsx */ 173);
-	
-	var _Posts2 = _interopRequireDefault(_Posts);
-	
 	var _SearchBar = __webpack_require__(/*! ./SearchBar.jsx */ 175);
 	
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
+	
+	var _SortBy = __webpack_require__(/*! ./SortBy.jsx */ 178);
+	
+	var _SortBy2 = _interopRequireDefault(_SortBy);
+	
+	var _Posts = __webpack_require__(/*! ./Posts.jsx */ 173);
+	
+	var _Posts2 = _interopRequireDefault(_Posts);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -96,7 +100,8 @@
 	
 	    _this.state = {
 	      subreddit: null,
-	      posts: []
+	      posts: [],
+	      sortby: 'hot'
 	    };
 	
 	    return _this;
@@ -104,14 +109,20 @@
 	
 	  _createClass(App, [{
 	    key: 'loadSubreddit',
-	    value: function loadSubreddit(term) {
+	    value: function loadSubreddit(term, criteria) {
+	
 	      if (term) {
 	        term = term.replace(' ', '+');
 	      }
 	
+	      if (!criteria) {
+	        criteria = 'hot';
+	      }
+	      this.setState({ sortby: criteria });
+	
 	      var context = this;
 	      var apiUrl = 'https://www.reddit.com/r/';
-	      var fullUrl = apiUrl + term + '.json';
+	      var fullUrl = apiUrl + term + '/' + criteria + '.json';
 	
 	      // If no search term, get reddit homepage
 	      if (!term) {
@@ -121,8 +132,13 @@
 	      // If search term is less than 3 chars, don't GET. Too short.
 	      if (term && term.length < 3) {
 	        return;
+	      } else {
+	        this.setState({ subreddit: term });
 	      }
 	
+	      console.log(fullUrl);
+	      console.log(this.state);
+	      console.log(term);
 	      // Get search results
 	      axios.get(fullUrl).then(function (response) {
 	        console.log(response.data.data.children);
@@ -133,6 +149,12 @@
 	        console.log(error);
 	      });
 	    }
+	
+	    // changeSort(criteria) {
+	    //   // Adjust sort criteria and reload posts
+	    //   this.loadSubreddit(this.state.subreddit, criteria);
+	    // }
+	
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
@@ -148,6 +170,7 @@
 	        _react2.default.createElement(_Header2.default, null),
 	        _react2.default.createElement(_Subheader2.default, null),
 	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: this.loadSubreddit.bind(this) }),
+	        _react2.default.createElement(_SortBy2.default, { changeSort: this.loadSubreddit.bind(this), term: this.state.subreddit, sortby: this.state.sortby }),
 	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts })
 	      );
 	    }
@@ -22312,6 +22335,91 @@
 	};
 	
 	exports.default = Subheader;
+
+/***/ },
+/* 178 */
+/*!***********************************!*\
+  !*** ./src/client/app/SortBy.jsx ***!
+  \***********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SortBy = function SortBy(_ref) {
+	  var changeSort = _ref.changeSort,
+	      term = _ref.term,
+	      sortby = _ref.sortby;
+	
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      'Sorting by ',
+	      sortby
+	    ),
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      _react2.default.createElement(
+	        'li',
+	        { onClick: function onClick() {
+	            return changeSort(term, 'hot');
+	          } },
+	        'Hot'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        { onClick: function onClick() {
+	            return changeSort(term, 'new');
+	          } },
+	        'New'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        { onClick: function onClick() {
+	            return changeSort(term, 'rising');
+	          } },
+	        'Rising'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        { onClick: function onClick() {
+	            return changeSort(term, 'controversial');
+	          } },
+	        'Controversial'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        { onClick: function onClick() {
+	            return changeSort(term, 'top');
+	          } },
+	        'Top'
+	      ),
+	      _react2.default.createElement(
+	        'li',
+	        { onClick: function onClick() {
+	            return changeSort(term, 'ads');
+	          } },
+	        'Promoted'
+	      )
+	    )
+	  );
+	};
+	
+	exports.default = SortBy;
 
 /***/ }
 /******/ ]);
