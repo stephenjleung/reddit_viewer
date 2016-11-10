@@ -8,11 +8,20 @@ const PostItem = ({post}) => {
   return (
     <li className="list-group-item">
       <div className="media">
-        <div className="media-left">
-          <img className="media-object" style={{width: '100px', textAlign: 'center'}} src={ (imageUrl === 'self' || imageUrl === 'default') ? altImage : imageUrl } alt="No Thumbnail Provided" />
+
+        <div className="media-left media-middle" style={{minWidth: '50px', textAlilgn: 'center'}}>
+          <h4>{post.score}</h4>
         </div>
-        <div className="media-body">
-          <div className="media-heading">{post.title}</div>
+        <div className="media-left media-middle">
+
+          <img className="media-object" style={{minWidth: '140px', textAlign: 'center', borderRadius: '6px'}} src={ (imageUrl === 'self' || imageUrl === 'default') ? altImage : imageUrl } alt="No Thumbnail Provided" />
+        </div>
+        <div className="media-body media-middle">
+          <div className="media-heading"><h4>{post.title}</h4></div>
+          <p>submitted by {post.author} to /r/{post.subreddit}</p>
+          <p>{post.num_comments} comments</p>
+
+
         </div>
       </div>
     </li>

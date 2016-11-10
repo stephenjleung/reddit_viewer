@@ -22208,16 +22208,43 @@
 	      { className: 'media' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'media-left' },
-	        _react2.default.createElement('img', { className: 'media-object', style: { width: '100px', textAlign: 'center' }, src: imageUrl === 'self' || imageUrl === 'default' ? altImage : imageUrl, alt: 'No Thumbnail Provided' })
+	        { className: 'media-left media-middle', style: { minWidth: '50px', textAlilgn: 'center' } },
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          post.score
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'media-body' },
+	        { className: 'media-left media-middle' },
+	        _react2.default.createElement('img', { className: 'media-object', style: { minWidth: '140px', textAlign: 'center', borderRadius: '6px' }, src: imageUrl === 'self' || imageUrl === 'default' ? altImage : imageUrl, alt: 'No Thumbnail Provided' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'media-body media-middle' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'media-heading' },
-	          post.title
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            post.title
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'submitted by ',
+	          post.author,
+	          ' to /r/',
+	          post.subreddit
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          post.num_comments,
+	          ' comments'
 	        )
 	      )
 	    )
