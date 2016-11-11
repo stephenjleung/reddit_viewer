@@ -183,14 +183,7 @@
 	        _react2.default.createElement(_Subheader2.default, null),
 	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: loadSubreddit.bind(this) }),
 	        _react2.default.createElement(_SortBy2.default, { changeSort: loadSubreddit.bind(this), term: this.state.subreddit, sortby: this.state.sortby }),
-	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts }),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: function onClick() {
-	              loadSubreddit(_this2.state.subreddit, _this2.state.sortby, true);
-	            } },
-	          'LOAD MORE'
-	        )
+	        _react2.default.createElement(_Posts2.default, { posts: this.state.posts, loadSubreddit: loadSubreddit.bind(this), subreddit: this.state.subreddit, sortby: this.state.sortby })
 	      );
 	    }
 	  }]);
@@ -22114,9 +22107,24 @@
 	  });
 	
 	  return _react2.default.createElement(
-	    'ul',
-	    { style: { marginRight: '35px' } },
-	    postItems
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'ul',
+	      { style: { marginRight: '35px' } },
+	      postItems
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { style: { textAlign: 'center', paddingBottom: '2em' } },
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'btn btn-primary', onClick: function onClick() {
+	            props.loadSubreddit(props.subreddit, props.sortby, true);
+	          } },
+	        'LOAD MORE'
+	      )
+	    )
 	  );
 	};
 	

@@ -98,8 +98,7 @@ class App extends React.Component {
         <Subheader />
         <SearchBar onSearchTermChange={loadSubreddit.bind(this)} />
         <SortBy changeSort={loadSubreddit.bind(this)} term={this.state.subreddit} sortby={this.state.sortby} />
-        <Posts posts={this.state.posts} />
-        <button onClick={() => { loadSubreddit(this.state.subreddit, this.state.sortby, true); }} >LOAD MORE</button>
+        <Posts posts={this.state.posts} loadSubreddit={loadSubreddit.bind(this)} subreddit={this.state.subreddit} sortby={this.state.sortby}/>
       </div>
     );
   }

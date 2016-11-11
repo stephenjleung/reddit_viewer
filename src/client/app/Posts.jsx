@@ -13,9 +13,14 @@ const Posts = (props) => {
   });
   
   return (
-    <ul style={{marginRight: '35px'}}>
-      {postItems}
-    </ul>
+    <div>
+      <ul style={{marginRight: '35px'}}>
+        {postItems}
+      </ul>
+      <div style={{textAlign: 'center', paddingBottom: '2em'}}>
+        <button className="btn btn-primary" onClick={() => { props.loadSubreddit(props.subreddit, props.sortby, true); }} >LOAD MORE</button>
+      </div>
+    </div>
   );
   
 };
