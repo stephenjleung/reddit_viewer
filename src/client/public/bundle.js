@@ -98,6 +98,8 @@
 	      posts: [],
 	      sortby: 'hot'
 	    };
+	    // For endless scrolling
+	    _this.handleScroll = _this.handleScroll.bind(_this);
 	
 	    return _this;
 	  }
@@ -126,10 +128,10 @@
 	        term = '';
 	      }
 	
-	      console.log('loadmore is ', loadmore);
+	      // console.log('loadmore is ', loadmore);
 	      if (loadmore) {
 	        var lastItem = this.state.posts[this.state.posts.length - 1].data.name;
-	        console.log('the last item is: ', lastItem);
+	        // console.log('the last item is: ', lastItem);
 	        var after = '?after=' + lastItem;
 	      } else {
 	        var after = '';
@@ -146,7 +148,7 @@
 	
 	      // Get search results
 	      axios.get(fullUrl).then(function (response) {
-	        console.log(response.data.data.children);
+	        // console.log(response.data.data.children);
 	
 	        if (loadmore) {
 	          context.setState({
@@ -166,6 +168,26 @@
 	    value: function componentDidMount() {
 	      // Perform GET of homepage on page load.
 	      this.loadSubreddit();
+	
+	      // For endless scrolling
+	      window.addEventListener("scroll", this.handleScroll);
+	    }
+	
+	    // For endless scrolling
+	
+	  }, {
+	    key: 'handleScroll',
+	    value: function handleScroll() {
+	      var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+	      var body = document.body;
+	      var html = document.documentElement;
+	      var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+	      var windowBottom = windowHeight + window.pageYOffset;
+	      if (windowBottom >= docHeight) {
+	        this.loadSubreddit(this.state.subreddit, this.state.sortby, true);
+	      } else {
+	        // console.log('not at bottom yet');
+	      }
 	    }
 	  }, {
 	    key: 'render',

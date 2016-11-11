@@ -15,6 +15,8 @@ class App extends React.Component {
       posts: [],
       sortby: 'hot'
     };
+    // For endless scrolling
+    this.handleScroll = this.handleScroll.bind(this);
     
   }
 
@@ -41,10 +43,10 @@ class App extends React.Component {
     }
 
 
-    console.log('loadmore is ', loadmore);
+    // console.log('loadmore is ', loadmore);
     if (loadmore) {
       var lastItem = this.state.posts[this.state.posts.length - 1].data.name;
-      console.log('the last item is: ', lastItem);
+      // console.log('the last item is: ', lastItem);
       var after = '?after=' + lastItem;
     } else {
       var after = '';
@@ -63,7 +65,7 @@ class App extends React.Component {
     // Get search results
     axios.get(fullUrl)
       .then(function(response) {
-        console.log(response.data.data.children);
+        // console.log(response.data.data.children);
 
         if (loadmore) {
           context.setState({
@@ -87,6 +89,22 @@ class App extends React.Component {
     // Perform GET of homepage on page load.
     this.loadSubreddit();
 
+    // For endless scrolling
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  // For endless scrolling
+  handleScroll() {
+    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    const windowBottom = windowHeight + window.pageYOffset;
+    if (windowBottom >= docHeight) {
+      this.loadSubreddit(this.state.subreddit, this.state.sortby, true);
+    } else {
+      // console.log('not at bottom yet');
+    }
   }
 
   render () {
