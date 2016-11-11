@@ -7,7 +7,6 @@ class SearchBar extends React.Component {
     this.state = { term: ''};
   }
 
-
   render() {
     return (
       <div style={{textAlign: 'center', paddingBottom: '1.5em'}}>
@@ -16,7 +15,7 @@ class SearchBar extends React.Component {
           placeholder="Enter Subreddit(s) Here"
           value={this.state.term}
           onChange={event => this.onInputChange(event.target.value)}
-          style={{}}
+          style={{border: '3px solid #B8AF90', borderRadius: '3px'}}
         />
         </h3>
       </div>

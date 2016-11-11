@@ -20,18 +20,21 @@ class App extends React.Component {
     
   }
 
+  // Main search function to get posts
   loadSubreddit(term, criteria, loadmore) {
 
+    // Allow for multiple subreddits, space delimited
     if (term) {
       term = term.replace(' ', '+');
     }
 
+    // Default to sorting by 'hot'
     if (!criteria) {
       criteria = 'hot';
     }
     this.setState({sortby: criteria});
 
-    // Save this for inside axios call
+    // Save 'this' for inside Axios call
     var context = this;
     
     var apiUrl = 'https://www.reddit.com/r/';
@@ -41,7 +44,6 @@ class App extends React.Component {
       apiUrl = 'https://www.reddit.com/';
       term = '';
     }
-
 
     // console.log('loadmore is ', loadmore);
     if (loadmore) {
@@ -60,7 +62,6 @@ class App extends React.Component {
     } else {
       this.setState({subreddit: term});
     }
-
 
     // Get search results
     axios.get(fullUrl)
@@ -84,21 +85,20 @@ class App extends React.Component {
 
   }
 
-
   componentDidMount() {
     // Perform GET of homepage on page load.
     this.loadSubreddit();
 
     // For endless scrolling
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
   }
 
   // For endless scrolling
   handleScroll() {
-    const windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
     const body = document.body;
     const html = document.documentElement;
-    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight,  html.scrollHeight, html.offsetHeight);
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
     const windowBottom = windowHeight + window.pageYOffset;
     if (windowBottom >= docHeight) {
       this.loadSubreddit(this.state.subreddit, this.state.sortby, true);
@@ -111,7 +111,7 @@ class App extends React.Component {
     // To limit Axios calls during live-search
     const loadSubreddit = _.debounce((term, criteria, loadmore) => { this.loadSubreddit(term, criteria, loadmore); }, 300);
     return (
-      <div>
+      <div style={{background: '#fffcf2', marginTop: '-20px'}}>
         <Header />
         <Subheader />
         <SearchBar onSearchTermChange={loadSubreddit.bind(this)} />

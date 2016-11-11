@@ -104,20 +104,25 @@
 	    return _this;
 	  }
 	
+	  // Main search function to get posts
+	
+	
 	  _createClass(App, [{
 	    key: 'loadSubreddit',
 	    value: function loadSubreddit(term, criteria, loadmore) {
 	
+	      // Allow for multiple subreddits, space delimited
 	      if (term) {
 	        term = term.replace(' ', '+');
 	      }
 	
+	      // Default to sorting by 'hot'
 	      if (!criteria) {
 	        criteria = 'hot';
 	      }
 	      this.setState({ sortby: criteria });
 	
-	      // Save this for inside axios call
+	      // Save 'this' for inside Axios call
 	      var context = this;
 	
 	      var apiUrl = 'https://www.reddit.com/r/';
@@ -170,7 +175,7 @@
 	      this.loadSubreddit();
 	
 	      // For endless scrolling
-	      window.addEventListener("scroll", this.handleScroll);
+	      window.addEventListener('scroll', this.handleScroll);
 	    }
 	
 	    // For endless scrolling
@@ -178,7 +183,7 @@
 	  }, {
 	    key: 'handleScroll',
 	    value: function handleScroll() {
-	      var windowHeight = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+	      var windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
 	      var body = document.body;
 	      var html = document.documentElement;
 	      var docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
@@ -200,7 +205,7 @@
 	      }, 300);
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { style: { background: '#fffcf2', marginTop: '-20px' } },
 	        _react2.default.createElement(_Header2.default, null),
 	        _react2.default.createElement(_Subheader2.default, null),
 	        _react2.default.createElement(_SearchBar2.default, { onSearchTermChange: loadSubreddit.bind(this) }),
@@ -22178,7 +22183,7 @@
 	    null,
 	    _react2.default.createElement(
 	      'h1',
-	      { className: 'jumbotron', style: { textAlign: 'center' } },
+	      { className: 'jumbotron', style: { textAlign: 'center', background: '#B8AF90' } },
 	      'Reddit Viewer'
 	    )
 	  );
@@ -22242,7 +22247,7 @@
 	            onChange: function onChange(event) {
 	              return _this2.onInputChange(event.target.value);
 	            },
-	            style: {}
+	            style: { border: '3px solid #B8AF90', borderRadius: '3px' }
 	          })
 	        )
 	      );
@@ -22370,10 +22375,17 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	//<h3 className='' style={{textAlign: 'center'}}>Default: Sorted by Hotness</h3>
 	var Subheader = function Subheader(props) {
 	
-	  return _react2.default.createElement('div', null);
+	  return _react2.default.createElement(
+	    'div',
+	    { style: { textAlign: 'center' } },
+	    _react2.default.createElement(
+	      'h4',
+	      null,
+	      'Features: Multiple Subreddits, Sorting, Endless Scrolling, Search-As-You-Type, Working Links, Upvote Counter'
+	    )
+	  );
 	};
 	
 	exports.default = Subheader;

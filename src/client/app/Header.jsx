@@ -4,7 +4,7 @@ const Header = (props) => {
 
   return (
     <div>
-      <h1 className='jumbotron' style={{textAlign: 'center'}}>Reddit Viewer</h1>
+      <h1 className='jumbotron' style={{textAlign: 'center', background: '#B8AF90'}}>Reddit Viewer</h1>
     </div>
   );
 

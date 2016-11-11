@@ -1,11 +1,10 @@
 import React from 'react';
 
-//<h3 className='' style={{textAlign: 'center'}}>Default: Sorted by Hotness</h3>
 const Subheader = (props) => {
 
   return (
-    <div>
-      
+    <div style={{textAlign: 'center'}}>
+      <h4>Features: Multiple Subreddits, Sorting, Endless Scrolling, Search-As-You-Type, Working Links, Upvote Counter</h4>
     </div>
   );
 

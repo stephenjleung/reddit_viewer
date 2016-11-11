@@ -6,7 +6,7 @@ const PostItem = ({post}) => {
   const altImage = 'http://vignette3.wikia.nocookie.net/ensemble-stars/images/1/10/Reddit.png/revision/latest?cb=20151110193005';
   
   return (
-    <li className="list-group-item">
+    <li className="list-group-item" >
       <div className="media">
         <div className="media-left media-middle" style={{minWidth: '50px', textAlilgn: 'center'}}>
           <h4>{post.score}</h4>
